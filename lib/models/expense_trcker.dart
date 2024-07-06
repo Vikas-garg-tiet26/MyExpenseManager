@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 const uuid = Uuid();
+
+enum Category{ food, work, leisure, travel }
 
 class ExpenseTrcker {
   ExpenseTrcker({
@@ -17,8 +19,4 @@ class ExpenseTrcker {
   final double amount;
   final DateTime date;
   final Category category;
-}// @override
-  // Widget build(BuildContext context) {
-//     return const Placeholder();
-//   }
-// }
+}
