@@ -3,6 +3,7 @@ import 'package:expense_trcker/models/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:expense_trcker/models/expense_trcker.dart';
+import 'package:expense_trcker/models/widgets/new_expense.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -29,25 +30,31 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
-        context: context, builder: (ctx) => const NewExpense());
+        context: context, builder: (ctx) =>  NewExpense(onAddExpense: _addExpenses,));
+  }
+
+  void _addExpenses(ExpenseTrcker expense) {
+    setState(() {
+        _registeredExpenses.add(expense);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutter Expense Tracker"),
+        title: const Text("Flutter Expense Tracker"),
         actions: [
           IconButton(
               onPressed: () {
                 _openAddExpenseOverlay();
               },
-              icon: Icon(Icons.add)),
+              icon: const Icon(Icons.add)),
         ],
       ),
       body: Column(
         children: [
-          const Text("The Expenses List.\.."),
+          const Text("The Expenses List..."),
           const SizedBox(
             height: 4,
           ),

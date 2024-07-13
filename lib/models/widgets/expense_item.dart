@@ -1,5 +1,4 @@
 import 'package:expense_trcker/models/expense_trcker.dart';
-import 'package:expense_trcker/models/expenses.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseItem extends StatelessWidget {
