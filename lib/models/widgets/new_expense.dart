@@ -2,7 +2,7 @@ import 'package:expense_trcker/models/expense_trcker.dart';
 import 'package:flutter/material.dart';
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({super.key,required this.onAddExpense});
+  const NewExpense({super.key, required this.onAddExpense});
 
   final void Function(ExpenseTrcker expense) onAddExpense;
   @override
@@ -46,7 +46,8 @@ class _NewExpenseState extends State<NewExpense> {
     final enteredAmount = double.tryParse(_amountcontroller.text);
     final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
     // tryParse('hello')=>null , tryParse('1.12')=1.12
-    if (_titlecontroller.text.trim().isEmpty || _selectedDate == null||amountIsInvalid) {
+    if (_titlecontroller.text.trim().isEmpty || amountIsInvalid) {
+      // ADD selecteddate==null in if
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
@@ -64,7 +65,11 @@ class _NewExpenseState extends State<NewExpense> {
       return;
       // show error message
     }
-    widget.onAddExpense(ExpenseTrcker(title: _titlecontroller.text, date: _selectedDate!, amount: enteredAmount, category: _selectedCategory));
+    widget.onAddExpense(ExpenseTrcker(
+        title: _titlecontroller.text,
+        date: DateTime.now(), //replace by selected date
+        amount: enteredAmount,
+        category: _selectedCategory));
   }
 
   @override

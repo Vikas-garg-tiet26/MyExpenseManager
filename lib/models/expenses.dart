@@ -3,7 +3,7 @@ import 'package:expense_trcker/models/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:expense_trcker/models/expense_trcker.dart';
-import 'package:expense_trcker/models/widgets/new_expense.dart';
+// import 'package:expense_trcker/models/widgets/new_expense.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -30,12 +30,15 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
-        context: context, builder: (ctx) =>  NewExpense(onAddExpense: _addExpenses,));
+        context: context,
+        builder: (ctx) => NewExpense(
+              onAddExpense: _addExpenses,
+            ));
   }
 
   void _addExpenses(ExpenseTrcker expense) {
     setState(() {
-        _registeredExpenses.add(expense);
+      _registeredExpenses.add(expense);
     });
   }
 
