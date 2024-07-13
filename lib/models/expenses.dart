@@ -30,6 +30,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+        isScrollControlled: true, //it would show full height of modal overlay.
         context: context,
         builder: (ctx) => NewExpense(
               onAddExpense: _addExpenses,
@@ -39,6 +40,12 @@ class _ExpensesState extends State<Expenses> {
   void _addExpenses(ExpenseTrcker expense) {
     setState(() {
       _registeredExpenses.add(expense);
+    });
+  }
+
+  void _removeExpenses(ExpenseTrcker expense) {
+    setState(() {
+      _registeredExpenses.remove(expense);
     });
   }
 
@@ -61,7 +68,11 @@ class _ExpensesState extends State<Expenses> {
           const SizedBox(
             height: 4,
           ),
-          Expanded(child: ExpensesList(expenses: _registeredExpenses))
+          Expanded(
+              child: ExpensesList(
+            expenses: _registeredExpenses,
+            onRemoveExpense: _removeExpenses,
+          ))
         ],
       ),
     );
