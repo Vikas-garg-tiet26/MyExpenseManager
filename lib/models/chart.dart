@@ -1,4 +1,5 @@
-import 'package:expense_trcker/models/chartex';
+// import 'package:expense_trcker/models/ch';
+import 'package:expense_trcker/models/chart_bar.dart';
 import 'package:expense_trcker/models/expense_trcker.dart';
 import 'package:flutter/material.dart';
 

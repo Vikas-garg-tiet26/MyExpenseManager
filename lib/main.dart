@@ -1,13 +1,19 @@
 import 'package:expense_trcker/models/expenses.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
 
 var kColorScheme =
-    ColorScheme.fromSeed(seedColor: Color.fromRGBO(255, 96, 59, 181));
+    ColorScheme.fromSeed(seedColor: const Color.fromRGBO(255, 96, 59, 181));
 
 var kDarkColorScheme =
     ColorScheme.fromSeed(seedColor: Colors.green, brightness: Brightness.dark);
+
 void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+  //     .then((fn) {
   runApp(const ExpenseApp());
+  // });
 }
 
 class ExpenseApp extends StatelessWidget {

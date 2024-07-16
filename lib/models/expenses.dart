@@ -3,7 +3,8 @@ import 'package:expense_trcker/models/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:expense_trcker/models/expense_trcker.dart';
-// import 'package:expense_trcker/models/widgets/new_expense.dart';
+import 'package:expense_trcker/models/chart.dart';
+// import 'package:expense_trcker/models/chart_bar.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -64,6 +65,8 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.width;
     Widget mainContent = const Center(
       child: Text('No Expenses Found. Start Adding Some!'),
     );
@@ -84,15 +87,33 @@ class _ExpensesState extends State<Expenses> {
               icon: const Icon(Icons.add)),
         ],
       ),
-      body: Column(
-        children: [
-          const Text("The Expenses List..."),
-          const SizedBox(
-            height: 4,
-          ),
-          Expanded(child: mainContent)
-        ],
-      ),
+      body: width < 600
+          ? Column(
+              children: [
+                const Text("The Expenses List..."),
+                Chart(
+                  expenses: _registeredExpenses,
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                Expanded(child: mainContent)
+              ],
+            )
+          : Row(
+              children: [
+                const Text("The Expenses List..."),
+                Expanded(
+                  child: Chart(
+                    expenses: _registeredExpenses,
+                  ),
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                Expanded(child: mainContent)
+              ],
+            ),
     );
   }
 }
