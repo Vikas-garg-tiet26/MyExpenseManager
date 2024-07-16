@@ -32,6 +32,7 @@ class _ExpensesState extends State<Expenses> {
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
         isScrollControlled: true, //it would show full height of modal overlay.
+        useSafeArea: true,
         context: context,
         builder: (ctx) => NewExpense(
               onAddExpense: _addExpenses,
@@ -79,6 +80,7 @@ class _ExpensesState extends State<Expenses> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Flutter Expense Tracker"),
+        centerTitle: true,
         actions: [
           IconButton(
               onPressed: () {
