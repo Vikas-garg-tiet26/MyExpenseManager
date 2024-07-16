@@ -64,95 +64,102 @@ class _NewExpenseState extends State<NewExpense> {
       );
       return;
       // show error message
+    } else {
+      widget.onAddExpense(
+        ExpenseTrcker(
+            title: _titlecontroller.text,
+            date: DateTime.now(), //replace by selected date
+            amount: enteredAmount,
+            category: _selectedCategory),
+      );
+      Navigator.pop(context);
     }
-    widget.onAddExpense(ExpenseTrcker(
-        title: _titlecontroller.text,
-        date: DateTime.now(), //replace by selected date
-        amount: enteredAmount,
-        category: _selectedCategory));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
-      child: Column(
-        children: [
-          // Text("Title Name"),
-          TextField(
-            controller: _titlecontroller,
-            maxLength: 50,
-            decoration: const InputDecoration(
-              label: Text("Title Name"),
+    final keyboardspace = MediaQuery.of(context).viewInsets.bottom;
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(20, 50, 20, keyboardspace + 16),
+        child: Column(
+          children: [
+            // Text("Title Name"),
+            TextField(
+              controller: _titlecontroller,
+              maxLength: 50,
+              decoration: const InputDecoration(
+                label: Text("Title Name"),
+              ),
             ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _amountcontroller,
-                  maxLength: 10,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    prefixText: '\$',
-                    label: Text("Enter Amount"),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _amountcontroller,
+                    maxLength: 10,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      prefixText: '\$',
+                      label: Text("Enter Amount"),
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(_selectedDate == null
-                        ? 'No Date Selected'
-                        : formatter.format(_selectedDate!)),
-                    IconButton(
-                        onPressed: () {
-                          _presentdatepicker;
-                        },
-                        icon: const Icon(Icons.calendar_month))
-                  ],
-                ),
-              )
-            ],
-          ),
-          Row(
-            children: [
-              DropdownButton(
-                  value: _selectedCategory,
-                  items: Category.values
-                      .map(
-                        (category) => DropdownMenuItem(
-                          value: category,
-                          child: Text(
-                            category.name.toString(),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(_selectedDate == null
+                          ? 'No Date Selected'
+                          : formatter.format(_selectedDate!)),
+                      IconButton(
+                          onPressed: () {
+                            _presentdatepicker;
+                          },
+                          icon: const Icon(Icons.calendar_month))
+                    ],
+                  ),
+                )
+              ],
+            ),
+            Row(
+              children: [
+                DropdownButton(
+                    value: _selectedCategory,
+                    items: Category.values
+                        .map(
+                          (category) => DropdownMenuItem(
+                            value: category,
+                            child: Text(
+                              category.name.toString(),
+                            ),
                           ),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (value) {
-                    if (value == null) {
-                      return;
-                    }
-                    setState(() {
-                      _selectedCategory = value;
-                    });
-                    print(value);
-                  }),
-              const Spacer(),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text("Cancel"),
-              ),
-              ElevatedButton(
-                  onPressed: _submitExpensedata,
-                  child: const Text("Save Expense"))
-            ],
-          )
-        ],
+                        )
+                        .toList(),
+                    onChanged: (value) {
+                      if (value == null) {
+                        return;
+                      }
+                      setState(() {
+                        _selectedCategory = value;
+                      });
+                      print(value);
+                    }),
+                const Spacer(),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Cancel"),
+                ),
+                ElevatedButton(
+                    onPressed: _submitExpensedata,
+                    child: const Text("Save Expense"))
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

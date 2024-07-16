@@ -102,7 +102,7 @@ class _ExpensesState extends State<Expenses> {
             )
           : Row(
               children: [
-                const Text("The Expenses List..."),
+                // const Text("The Expenses List..."),
                 Expanded(
                   child: Chart(
                     expenses: _registeredExpenses,
